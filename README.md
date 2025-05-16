@@ -47,6 +47,9 @@ Using **Matplotlib**, **Pandas**, and **Seaborn**, the script produces:
 ## ▶️ How to Run
 
 1. Clone the repo:
-git clone https://github.com/RCValenton/Page-View-Time-Series-Visualizer.git
+
+- git clone https://github.com/RCValenton/Page-View-Time-Series-Visualizer.git
+
 2. Run in terminal:
-python3 main.py 
+
+- python3 main.py 
