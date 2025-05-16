@@ -8,8 +8,10 @@ register_matplotlib_converters()
 df = pd.read_csv('fcc-forum-pageviews.csv', parse_dates=['date'], index_col='date')
 
 # Clean data
-df = None
-
+df = df[
+    (df['value'] >= df['value'].quantile(0.025)) &
+    (df['value'] <= df['value'].quantile(0.975))
+]
 
 def draw_line_plot():
     # Draw line plot
