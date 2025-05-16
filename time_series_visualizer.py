@@ -1,3 +1,5 @@
+import numpy as np
+np.float = float # Need this to fix decprecation issue
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -53,11 +55,25 @@ def draw_box_plot():
     df_box['year'] = [d.year for d in df_box.date]
     df_box['month'] = [d.strftime('%b') for d in df_box.date]
 
+    df_box['month_num'] = df_box['date'].dt.month
+    df_box = df_box.sort_values('month_num')
+
+    df_box['value'] = df_box['value'].astype(float)
+
     # Draw box plots (using Seaborn)
+    fig, axes = plt.subplots(1, 2, figsize=(20, 10))
 
+    # Year-wise Box Plot (Trend)
+    sns.boxplot(x='year', y='value', data=df_box, ax=axes[0])
+    axes[0].set_title('Year-wise Box Plot (Trend)')
+    axes[0].set_xlabel('Year')
+    axes[0].set_ylabel('Page Views')
 
-
-
+    # Month-wise Box Plot (Seasonality)
+    sns.boxplot(x='month', y='value', data=df_box, ax=axes[1])
+    axes[1].set_title('Month-wise Box Plot (Seasonality)')
+    axes[1].set_xlabel('Month')
+    axes[1].set_ylabel('Page Views')
 
     # Save image and return fig (don't change this part)
     fig.savefig('box_plot.png')
